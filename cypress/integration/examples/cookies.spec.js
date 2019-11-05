@@ -57,9 +57,9 @@ context('Cookies', () => {
     cy.getCookie('token').should('have.property', 'value', '123ABC')
 
     // cy.clearCookies() yields null
-    cy.clearCookie('token').should('be.null')
+    // cy.clearCookie('token').should('be.null')
 
-    cy.getCookie('token').should('be.null')
+    // cy.getCookie('token').should('be.null')
   })
 
   it('cy.clearCookies() - clear browser cookies', () => {
