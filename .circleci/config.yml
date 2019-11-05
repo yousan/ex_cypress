@@ -1,10 +1,68 @@
 version: 2.1
 orbs:
-  cypress: cypress/cypress@dev:0.0.1
+  # use latest 1.x.y version of the orb
+  # best practice is to use an exact version
+  cypress: cypress-io/cypress@1
+
+# simplest use case - do everything in a single job
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run
+
+# run tests using Chrome browser
+# (requires custom executor with Cypress docker image that has Chrome installed)
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run:
+#           executor: cypress/browsers-chrome69
+#           browser: chrome
+
+# single job, but build the app and start server
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run:
+#           build: "npm run build"
+#           start: "npm run server"
+
+# run only specific spec file
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run:
+#           record: false
+#           spec: "cypress/integration/*-b.js"
+
+# custom cypress run command
 workflows:
   build:
     jobs:
-      # record Cypress tests on the Dashboard
+      # checks out code and installs dependencies once
       - cypress/run:
-          group: "all tests"
-          record: true
+          # it is a single job, so no need to
+          # cache workspace (faster!)
+          no-workspace: true
+          command: 'npm run report'
+          post-steps:
+            - store_test_results:
+                path: cypress/results
+# realistic case: install in 1 job,
+# run tests in parallel on several machines after that
+# workflows:
+#   build:
+#     jobs:
+#       # checks out code and installs dependencies once
+#       - cypress/install:
+#           build: 'npm run build'
+#       # runs on 3 machines, load balances tests
+#       # and records on Cypress Dashboard
+#       - cypress/run:
+#           requires:
+#             - cypress/install
+#           record: true
+#           parallel: true
+#           parallelism: 3
+#           group: '3x'
+#           start: 'npm run server'
