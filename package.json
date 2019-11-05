@@ -8,8 +8,16 @@
     "cypress": "^3.6.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "report": "cypress run"
+    "test": "npm run unit",
+    "validate": "circleci config validate .circleci/config.yml",
+    "process": "circleci config process .circleci/config.yml",
+    "build": "echo building app 😃",
+    "server": "node ./server",
+    "unit": "ava-ts --verbose 'test/*.test.ts'",
+    "cy:run": "cypress run",
+    "delete:reports": "rm cypress/results/* || true",
+    "prereport": "npm run delete:reports",
+    "report": "cypress run --record false --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json"
   },
   "repository": {
     "type": "git",
