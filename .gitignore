@@ -78,3 +78,6 @@ typings/
 .fusebox/
 
 
+cypress/videos
+cypress/screenshots
+cypress/fixtures
