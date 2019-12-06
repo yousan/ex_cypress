@@ -1,12 +1,9 @@
 {
-  "name": "example_cypress",
+  "name": "ex_cypress",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {},
-  "devDependencies": {
-    "cypress": "^3.6.0"
-  },
   "scripts": {
     "test": "npm run unit",
     "validate": "circleci config validate .circleci/config.yml",
@@ -19,15 +16,38 @@
     "prereport": "npm run delete:reports",
     "report": "cypress run --record false --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json"
   },
+  "devDependencies": {
+    "@types/common-tags": "1.8.0",
+    "@types/execa": "0.9.0",
+    "@types/node": "10.14.22",
+    "@types/temp-write": "3.3.0",
+    "ava": "1.4.1",
+    "ava-ts": "0.25.2",
+    "cypress": "3.7.0",
+    "execa": "1.0.0",
+    "husky": "2.7.0",
+    "js-yaml": "3.13.1",
+    "mocha": "5.2.0",
+    "mocha-junit-reporter": "1.23.1",
+    "mocha-multi-reporters": "1.1.7",
+    "temp-write": "3.4.0",
+    "ts-node": "7.0.1",
+    "typescript": "3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run validate"
+    }
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yousan/example_cypress.git"
+    "url": "git+https://github.com/yousan/ex_cypress.git"
   },
   "keywords": [],
   "author": "Yousan_O (https://2017.l2tp.org)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yousan/example_cypress/issues"
+    "url": "https://github.com/yousan/ex_cypress/issues"
   },
-  "homepage": "https://github.com/yousan/example_cypress#readme"
+  "homepage": "https://github.com/yousan/ex_cypress#readme"
 }
